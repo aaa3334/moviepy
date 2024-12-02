@@ -1728,8 +1728,15 @@ class TextClip(ImageClip):
         pil_font = ImageFont.truetype(font, font_size)
         draw = ImageDraw.Draw(img)
 
-        # Draw rounded rectangle background
-        draw.rounded_rectangle([0, 0, img_width, img_height], radius=bg_radius, fill=bg_color)
+        
+        # Check if both bg_radius and bg_color are not None
+        if bg_radius is not None and bg_color is not None:
+            # Draw rounded rectangle background
+            draw.rounded_rectangle([0, 0, img_width, img_height], radius=bg_radius, fill=bg_color)
+        elif bg_color is not None:
+            # If bg_radius is None but bg_color is not, draw a regular rectangle
+            draw.rectangle([0, 0, img_width, img_height], fill=bg_color)
+        
 
         # Dont need allow break here, because we already breaked in caption
         text_width, text_height = find_text_size(
