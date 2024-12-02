@@ -1405,6 +1405,10 @@ class TextClip(ImageClip):
       a RGB (or RGBA if transparent = ``True``) ``tuple``, a color name, or an
       hexadecimal notation.
 
+    bg_radius
+        If there is a background colour, this enables curved edges on the background rectangle.
+        Can be a float.
+
     stroke_color
       Color of the stroke (=contour line) of the text. If ``None``,
       there will be no stroke.
@@ -1451,6 +1455,7 @@ class TextClip(ImageClip):
         margin=(None, None),
         color="black",
         bg_color=None,
+        bg_radius=None,
         stroke_color=None,
         stroke_width=0,
         method="label",
@@ -1724,8 +1729,7 @@ class TextClip(ImageClip):
         draw = ImageDraw.Draw(img)
 
         # Draw rounded rectangle background
-        corner_radius = 0.5
-        draw.rounded_rectangle([0, 0, img_width, img_height], radius=corner_radius, fill=bg_color)
+        draw.rounded_rectangle([0, 0, img_width, img_height], radius=bg_radius, fill=bg_color)
 
         # Dont need allow break here, because we already breaked in caption
         text_width, text_height = find_text_size(
