@@ -1405,6 +1405,12 @@ class TextClip(ImageClip):
       a RGB (or RGBA if transparent = ``True``) ``tuple``, a color name, or an
       hexadecimal notation.
 
+    bg_radius
+      The radius of the background. Defaults to None for no radius. This will
+      soften the edges of the background around the text clip giving it a
+      rounded rectangle edge. Can be a float. Will only have an effect if
+      bg_color is used.
+
     stroke_color
       Color of the stroke (=contour line) of the text. If ``None``,
       there will be no stroke.
@@ -1451,6 +1457,7 @@ class TextClip(ImageClip):
         margin=(None, None),
         color="black",
         bg_color=None,
+        bg_radius=0,
         stroke_color=None,
         stroke_width=0,
         method="label",
@@ -1719,9 +1726,20 @@ class TextClip(ImageClip):
         if bg_color is None and transparent:
             bg_color = (0, 0, 0, 0)
 
-        img = Image.new(img_mode, (img_width, img_height), color=bg_color)
-        pil_font = ImageFont.truetype(font, font_size)
-        draw = ImageDraw.Draw(img)
+        if bg_radius is None:
+            bg_radius = 0
+        
+        if bg_radius != 0:
+            
+            img = Image.new(img_mode, (img_width, img_height), color=(0,0,0,0))
+            pil_font = ImageFont.truetype(font, font_size)
+            draw = ImageDraw.Draw(img)
+            draw.rounded_rectangle([0, 0, img_width, img_height], radius=bg_radius, fill=bg_color)
+        else:
+            img = Image.new(img_mode, (img_width, img_height), color=bg_color)
+            pil_font = ImageFont.truetype(font, font_size)
+            draw = ImageDraw.Draw(img)
+        
 
         # Dont need allow break here, because we already breaked in caption
         text_width, text_height = find_text_size(
