@@ -1724,6 +1724,9 @@ class TextClip(ImageClip):
         if bg_color is None and transparent:
             bg_color = (0, 0, 0, 0)
         print("background radius is", bg_radius)
+        if bg_radius is None:
+            bg_radius = 0
+        
         if bg_radius != 0:
             
             img = Image.new(img_mode, (img_width, img_height), color=(0,0,0,0))
