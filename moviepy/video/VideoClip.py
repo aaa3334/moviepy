@@ -1724,18 +1724,15 @@ class TextClip(ImageClip):
         if bg_color is None and transparent:
             bg_color = (0, 0, 0, 0)
 
-        img = Image.new(img_mode, (img_width, img_height), color=(0,0,0,0))
-        pil_font = ImageFont.truetype(font, font_size)
-        draw = ImageDraw.Draw(img)
-
-        
-        # Check if both bg_radius and bg_color are not None
-        if bg_radius is not None and bg_color is not None:
-            # Draw rounded rectangle background
+        if bg_radius is not None:
+            img = Image.new(img_mode, (img_width, img_height), color=(0,0,0,0))
+            pil_font = ImageFont.truetype(font, font_size)
+            draw = ImageDraw.Draw(img)
             draw.rounded_rectangle([0, 0, img_width, img_height], radius=bg_radius, fill=bg_color)
-        elif bg_color is not None:
-            # If bg_radius is None but bg_color is not, draw a regular rectangle
-            draw.rectangle([0, 0, img_width, img_height], fill=bg_color)
+        else:
+            img = Image.new(img_mode, (img_width, img_height), color=bg_color)
+            pil_font = ImageFont.truetype(font, font_size)
+            draw = ImageDraw.Draw(img)
         
 
         # Dont need allow break here, because we already breaked in caption
