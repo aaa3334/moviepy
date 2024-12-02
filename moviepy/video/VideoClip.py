@@ -1466,6 +1466,9 @@ class TextClip(ImageClip):
         transparent=True,
         duration=None,
     ):
+        print(bg_radius)
+        if bg_radius is None:
+            bg_radius = 0
         def break_text(
             width, text, font, font_size, stroke_width, align, spacing
         ) -> List[str]:
