@@ -1455,7 +1455,7 @@ class TextClip(ImageClip):
         margin=(None, None),
         color="black",
         bg_color=None,
-        bg_radius=None,
+        bg_radius=0,
         stroke_color=None,
         stroke_width=0,
         method="label",
@@ -1466,10 +1466,10 @@ class TextClip(ImageClip):
         transparent=True,
         duration=None,
     ):
-        print(bg_radius)
-        if bg_radius is None:
-            bg_radius = 0
-        self.bg_radius = bg_radius
+        # print(bg_radius)
+        # if bg_radius is None:
+        #     bg_radius = 0
+        # self.bg_radius = bg_radius
         
         def break_text(
             width, text, font, font_size, stroke_width, align, spacing
