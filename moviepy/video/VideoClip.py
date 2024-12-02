@@ -1455,7 +1455,7 @@ class TextClip(ImageClip):
         margin=(None, None),
         color="black",
         bg_color=None,
-        bg_radius=None,
+        bg_radius=0,
         stroke_color=None,
         stroke_width=0,
         method="label",
@@ -1724,7 +1724,7 @@ class TextClip(ImageClip):
         if bg_color is None and transparent:
             bg_color = (0, 0, 0, 0)
 
-        if bg_radius is not None:
+        if bg_radius =! 0:
             img = Image.new(img_mode, (img_width, img_height), color=(0,0,0,0))
             pil_font = ImageFont.truetype(font, font_size)
             draw = ImageDraw.Draw(img)
