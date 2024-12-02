@@ -1719,9 +1719,13 @@ class TextClip(ImageClip):
         if bg_color is None and transparent:
             bg_color = (0, 0, 0, 0)
 
-        img = Image.new(img_mode, (img_width, img_height), color=bg_color)
+        img = Image.new(img_mode, (img_width, img_height), color=(0,0,0,0))  # Transparent background
         pil_font = ImageFont.truetype(font, font_size)
         draw = ImageDraw.Draw(img)
+
+        # Draw rounded rectangle background
+        corner_radius = 20  # Adjust as needed
+        draw.rounded_rectangle([0, 0, img_width, img_height], radius=corner_radius, fill=bg_color)
 
         # Dont need allow break here, because we already breaked in caption
         text_width, text_height = find_text_size(
