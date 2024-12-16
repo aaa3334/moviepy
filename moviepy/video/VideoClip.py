@@ -1466,10 +1466,7 @@ class TextClip(ImageClip):
         transparent=True,
         duration=None,
     ):
-        # print(bg_radius)
-        # if bg_radius is None:
-        #     bg_radius = 0
-        # self.bg_radius = bg_radius
+
         
         def break_text(
             width, text, font, font_size, stroke_width, align, spacing
@@ -1728,7 +1725,7 @@ class TextClip(ImageClip):
 
         if bg_color is None and transparent:
             bg_color = (0, 0, 0, 0)
-        print("background radius is", bg_radius)
+
         if bg_radius is None:
             bg_radius = 0
         
